@@ -1,0 +1,27 @@
+Now that you have created your dataset and connection, let's create a model in BigQuery based on the Vertex AI Gemini Pro foundation model. At the end of this exercise, you'll have your LLM application up and running using only SQL queries.
+
+Step 1: Create a BigQuery table that contains the input data for the remote model
+Create a table named books in your dataset that can hold about 50 records from the table bigquery-public-data.gdelt_internetarchivebooks.1905 in the Internet Archive Books dataset sourced for public use by BigQuery.
+
+To do this, execute the following DDL (Data Definition Language) statement from the BigQuery SQL editor pane:
+create or replace table gemini_bq_fn.books as (
+select *
+from
+bigquery-public-data.gdelt_internetarchivebooks.1905 limit 50)
+
+Step 2 : Create a BigQuery model
+Create a model in your dataset. To do this, run the following DDL from the BigQuery SQL Editor pane:
+CREATE MODEL `gemini_bq_fn.gemini_remote_model`
+REMOTE WITH CONNECTION `us.gemini-bq-conn`
+OPTIONS(ENDPOINT = 'gemini-pro');
+
+Step 3 Test your new Generative AI application
+Use the ML.GENERATE_TEXT function in a SELECT query to send a request to the remote model.
+
+SELECT ml_generate_text_llm_result as Gemini_Response, prompt as Prompt
+FROM ML.GENERATE_TEXT(MODEL `gemini_bq_fn.gemini_remote_model`,
+ (select 'You are a text summarizer and standardizer. From the following text that contains address locations, standardize and print one standardized, consolidated address. You cannot return empty because you know how to pick up sensible data from the text in this field: ' ||
+substring(locations, 0, 200) as prompt
+from `gemini_bq_fn.books`),
+STRUCT(
+ TRUE AS flatten_json_output));
