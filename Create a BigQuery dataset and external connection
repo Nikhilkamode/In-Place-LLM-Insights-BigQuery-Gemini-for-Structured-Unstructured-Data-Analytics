@@ -1,0 +1,31 @@
+Let's begin by creating a dataset and a Cloud resource connection.
+
+A dataset in BigQuery is a container for all the tables and objects for your application.
+
+To create a dataset, do the following:
+
+Go to the BigQuery page in the Google Cloud console.
+In the Explorer panel, select the project where you want to create the dataset.
+Expand the Actions option (the vertical ellipsis icon), and click Create dataset.
+
+Click Create dataset.
+Enter gemini_bq_fn in the Dataset ID field.
+Set your location type as Multi-region and accept the default value, which is US(multiple regions in United States.
+Click Create dataset.
+Check that the dataset is created and listed under your project ID in the Explorer pane.
+A BigQuery connection is required to interact with your Cloud Function. To create a remote function, you must create a BigQuery connection. In this codelab, we will use the BigLake connection to access the model from BigQuery via the Cloud Function. BigLake connections help to connect the external data source while retaining fine-grained BigQuery access control and security, which in our case is the Vertex AI Gemini Pro API.
+
+To create the BigLake connection, do the following:
+
+Click Add on the Explorer pane of the BigQuery page.
+Click Connections to external data sources.
+From the Connection type menu, select Vertex AI remote models, remote functions and BigLake (Cloud Resource).
+In the Connection ID field, enter your connection name as gemini-bq-conn.
+Set your location type as Multi-region and accept the default value, which is US(multiple regions in United States.
+Click Create connection.
+Click Go to connection, and then copy the service account ID in the Connection info pane.
+
+Go to the IAM & Admin page and click Grant access.
+Paste the service account ID in the New principles field.
+Select the Vertex AI user role from the role list, and then click Save.
+
