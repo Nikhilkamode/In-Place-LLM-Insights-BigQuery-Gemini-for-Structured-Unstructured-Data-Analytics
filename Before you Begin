@@ -8,4 +8,17 @@ gcloud auth list
 5.Run the following command in Cloud Shell to confirm that the gcloud command knows about your project.
 gcloud config list project
 
-6.
+6.If your project is not set, use the following command to set it:
+gcloud config set project <YOUR_PROJECT_ID>
+
+7. Navigate to the Gemini for Google Cloud Marketplace to enable the API. You can also use the following command in the Cloud Shell terminal:
+gcloud services enable cloudaicompanion.googleapis.com --project PROJECT_ID
+
+8.Make sure that the following APIs are enabled:
+BigQuery
+BigQuery Connection
+Cloud Function
+Cloud Run
+Vertex AI
+Cloud Build
+Cloud Storage APIs
