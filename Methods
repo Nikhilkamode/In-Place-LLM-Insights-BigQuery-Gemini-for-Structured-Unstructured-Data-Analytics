@@ -1,0 +1,13 @@
+Method 1: Remote Model Invocation
+Call Gemini 1.0 Pro from within BigQuery using ML.GENERATE_TEXT in the SELECT query.
+Use this approach when the model is already available as a remote model in BigQuery and you would like to use it out-of-the-box. Check the status of the model you want to use in the BigQuery documentation.
+
+Method 2: Remote Function Implementation
+Call a Cloud Function that implements Gemini 1.0 Pro Vision call, exposed as a remote function in BigQuery.
+Use this approach when the model you want to use is either not available out-of-the-box as a remote model or you want more flexibility and customization in your use case.
+
+
+Why BigQuery?
+BigQuery is a serverless, multi-cloud data warehouse that can scale from bytes to petabytes with minimal operational overhead and is hence a great choice for storing ML training data. Using the built-in BigQuery Machine Learning (BQML) and analytics capabilities, you can create no-code predictions using just SQL queries. Additionally, you can access data from external sources with federated queries, eliminating the need for complicated ETL pipelines.
+
+BigQuery is a fully managed cloud data warehouse that helps users analyze structured, semi-structured, and unstructured data.
